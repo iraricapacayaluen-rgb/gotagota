@@ -1,58 +1,58 @@
 // EVENTOS EN JAVASCRIPT (CLICK, CARGAR, KEY,)
+
 document.addEventListener("DOMContentLoaded", () => {
-    fetch('http://localhost:8080/api/clientes')
-        .then(response => response.json())
-        .then(data => {
 
-            //console.log('Datos:', data);
-            const elemento = document.getElementById("table-cliente")
-            for (let i = 0; i < data.length; i++) {
-                // data[i], muestra en forma de array
-                const cliente = data[i]
-                const row = document.createElement("tr")
-                // alt + 96 
-                row.innerHTML = `
-                          <tr>
-                          <td>${cliente.id}</td>
-                          <td>${cliente.nombre}</td>    
-                          <td>${cliente.apellido}</td>
-                          <td>${cliente.dni}</td>
-                          <td>${cliente.telefono}</td>
-                          <td>${cliente.direccion}</td>
-                          <td>
-                               <div class="d-flex gap-2">
-
-                                  <!-- Botón Editar -->
-
-                               <button class="btn btn-outline-primary">
-                               Editar
+  fetch("http://localhost:8080/api/cliente")
+    .then((response) => response.json())
+    .then((data) => {
+      // DOM -> <tbody id="table-cliente">
+      const elemento = document.getElementById("table-cliente");
+      for (let i = 0; i < data.length; i++) {
+        //data[i], muestra en forma de array
+        let cliente = data[i];
+        // alt + 96
+        let fila = `
+                            <tr>
+                            <td>${cliente.id}</td>
+                            <td>${cliente.nombre}</td>
+                            <td>${cliente.apellido}</td>
+                            <td>${cliente.dni}</td>
+                            <td>${cliente.telefono}</td>
+                            <td>${cliente.direccion}</td>
+                            <td> 
+                                <button class="btn btn-outline-primary me-2">
+                                    <i class="fas fa-edit"></i> Editar
                                 </button>
+                                <button id="btnEliminar" data-idcliente = ${cliente.id} class="btn btn-outline-danger">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+                            </td>
+                            </tr>                
+                           `;
+        elemento.innerHTML += fila;
+      }
+    });
 
-                                       
-                                <!-- Botón Eliminar -->
+});
 
-                             <button class="btn btn-outline-danger">
-                                      Eliminar
-                                      </button>
-
-                      </div>
-
-                      </buton>
-                          </td>
-                          </tr>
-
-                          `
-                elemento.appendChild(row)
-
-                console.log(cliente) // Muestra los resultados en consola 
-            }
+// EVENTO DE CLICK EN JAVASCRIPT
+//Creamos una variable que almacene el DOM de ese elemento del boton
+document.addEventListener("click", function (e) {
+  const btnDelete = e.target.closest("#btnEliminar");
+    if (btnDelete) { //TRUE o 1
+        alert("Eliminando...");
+        const id = btnDelete.dataset.idcliente;
+        //console.log(id) para en consola que ID es nada mas
+       // fetch(`http://localhost:8080/api/clientes/${id}`, {
+        fetch("http://localhost:8080/api/cliente/"+id, {
+          method: 'DELETE'
         })
-
-
-
-
-
-
-
-
+        .then(response => {
+            if (response.ok) {
+              alert('Cliente eliminado correctamente');
+              location.reload(); // Recargar la página para reflejar los cambios
+            } else {
+              alert('Error al eliminar el cliente');
+        }})
+    }
 });
