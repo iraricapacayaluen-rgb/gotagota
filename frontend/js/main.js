@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <button class="btn btn-outline-primary me-2">
                                     <i class="fas fa-edit"></i> Editar
                                 </button>
+                          
                                 <button id="btnEliminar" data-idcliente = ${cliente.id} class="btn btn-outline-danger">
                                     <i class="fas fa-trash"></i> Eliminar
                                 </button>
