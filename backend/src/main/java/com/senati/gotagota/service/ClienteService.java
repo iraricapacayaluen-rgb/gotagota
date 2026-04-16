@@ -29,5 +29,23 @@ public class ClienteService {
     }
 
 
+    // create un cliente   // nombre de la clase
+    public Cliente crearCliente(Cliente cliente) {
+        return clienteRepository.save(cliente);
+    }
 
-}
+    // Eliminar el cliente por ID
+    public void beliminarCliente(Long id){
+        clienteRepository.deleteById(id);
+    };
+
+
+
+
+
+
+
+    }
+
+
+

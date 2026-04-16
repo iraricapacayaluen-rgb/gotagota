@@ -27,10 +27,13 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-
     //GET /api/clientes -> devuelve todos los clientes en formato JSON
     @GetMapping
     public List<Cliente> listar(){return clienteService.listarTodos();}
+    @PostMapping
+    public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente){
+        return  ResponseEntity.ok(clienteService.crearCliente(cliente));
+    }
 
     //DELETE
     @DeleteMapping ("/{id}")
