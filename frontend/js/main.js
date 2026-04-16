@@ -20,7 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             <td>${cliente.telefono}</td>
                             <td>${cliente.direccion}</td>
                             <td> 
-                                <button class="btn btn-outline-primary me-2">
+                                <button 
+
+                                class="btn btn-outline-primary me-2">
                                     <i class="fas fa-edit"></i> Editar
                                 </button>
                                 <button id="btnEliminar" data-idcliente = ${cliente.id} class="btn btn-outline-danger">
@@ -56,3 +58,27 @@ document.addEventListener("click", function (e) {
         }})
     }
 });
+//CREAMOS UN FUNCION BASICA
+function guardarCliente(){
+  const nombre= document.getElementById("c_nombre").value;
+  const apellido=document.getElementById("c_apellido").value;
+  const dni =document.getElementById("c_dni").value;
+  const telefono=document.getElementById("c_telefono").value;
+  const direccion=document.getElementById("c_direccion").value;
+  fetch("http://localhost:8080/api/clientes",{
+    method: "POST",
+    headers: {"Conten-Type":"application/json"},
+  body:JSON.stringify({nombre,apellido,dni,telefono,direccion})
+  }).then((response) =>{
+    console.log(response)// mensaje en la consola (200 o ok)
+    if(response.ok){
+      location.reload()
+    }else{
+      alert("Error:no se puede guardar")
+
+    }
+  });
+}    
+           
+
+
