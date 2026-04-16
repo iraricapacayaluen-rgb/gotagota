@@ -34,7 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
         elemento.innerHTML += fila;
       }
     });
-
+    // Dar accion al boton
+    const btnSaveCliente = document.getElementById("btn-crearcliente")
+    btnSaveCliente.addEventListener("click", guardarCliente)
 });
 
 // EVENTO DE CLICK EN JAVASCRIPT
@@ -67,18 +69,17 @@ function guardarCliente(){
   const direccion=document.getElementById("c_direccion").value;
   fetch("http://localhost:8080/api/clientes",{
     method: "POST",
-    headers: {"Conten-Type":"application/json"},
-  body:JSON.stringify({nombre,apellido,dni,telefono,direccion})
+    headers: {"Content-Type":"application/json"},
+  body: JSON.stringify({nombre,apellido,dni,telefono,direccion})
   }).then((response) =>{
-    console.log(response)// mensaje en la consola (200 o ok)
+    console.log(response);// mensaje en la consola (200 o ok)
     if(response.ok){
       location.reload()
     }else{
-      alert("Error:no se puede guardar")
-
+      alert("Error: no se puede guardar")
     }
-  });
-}    
+  }).catch((e) =>(
+    console.log(e)
+  ));
            
-
-
+}
