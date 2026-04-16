@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  fetch("http://localhost:8080/api/cliente")
+  fetch("http://localhost:8080/api/clientes")
     .then((response) => response.json())
     .then((data) => {
       // DOM -> <tbody id="table-cliente">
@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <button class="btn btn-outline-primary me-2">
                                     <i class="fas fa-edit"></i> Editar
                                 </button>
-                          
                                 <button id="btnEliminar" data-idcliente = ${cliente.id} class="btn btn-outline-danger">
                                     <i class="fas fa-trash"></i> Eliminar
                                 </button>
@@ -44,8 +43,8 @@ document.addEventListener("click", function (e) {
         alert("Eliminando...");
         const id = btnDelete.dataset.idcliente;
         //console.log(id) para en consola que ID es nada mas
-       // fetch(`http://localhost:8080/api/clientes/${id}`, {
-        fetch("http://localhost:8080/api/cliente/"+id, {
+        //fetch("http://localhost:8080/api/clientes/"+id, {
+        fetch(`http://localhost:8080/api/clientes/${id}`, {
           method: 'DELETE'
         })
         .then(response => {

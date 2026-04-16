@@ -1,21 +1,18 @@
 package com.senati.gotagota.service;
-
-
 import com.senati.gotagota.entity.Cliente;
 import com.senati.gotagota.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
+//Importamos la anotacion @service
+//Esto es la capa de la logica de negocio, aqui van las validaciones, calculos, etc.
 @Service
 public class ClienteService {
-
-    //Inyectamos el repositorio para acceder a la base de datos
+    //Inyectamos el repositorio para poder acceder a la base de datos
     private final ClienteRepository clienteRepository;
 
-    //Construcctor: Spring inyecta automaticamente el repositorio
-    public ClienteService(ClienteRepository clienteRepository){
-        this.clienteRepository  = clienteRepository;
+    //Contructor: Spring inyecta automaticamente el repositorio(las dependencias)
+    public ClienteService(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
     }
 
     //Retorna o recibe la lista de todos los clientes
@@ -23,29 +20,24 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    //Eliminamos el Cliete
-    public void eliminarCliente(Long id){
-        clienteRepository.deleteById(id);
-    }
-
-
-    // create un cliente   // nombre de la clase
-    public Cliente crearCliente(Cliente cliente) {
+    // Crear un cliente        //nombre de la clase
+    public Cliente crearCliente(Cliente cliente){
         return clienteRepository.save(cliente);
     }
-
-    // Eliminar el cliente por ID
-    public void beliminarCliente(Long id){
+    //Elimina el cliente por ID
+    public void eliminarCliente(Long id) {
         clienteRepository.deleteById(id);
     };
 
 
+}
 
 
 
 
 
-    }
+
+
 
 
 
